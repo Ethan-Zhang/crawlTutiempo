@@ -12,12 +12,12 @@ git clone https://github.com/Ethan-Zhang/crawlTutiempo.git
 ```
 
 # Quick Start
-**Start crawl with the city, start_year, end_year**
+**Start crawling site with the args of city, start_year, end_year**
 ```
 cd crawlTutiempo
 scrapy crawl tutiempo -a city=Beijing -a start_year=2014 -a end_year=2015 -o item.json
 ```
-**View the history weather in item.json**
+**View the history weather data in item.json**
 
 # More Infomation
 [scrapy](https://github.com/scrapy/scrapy)
