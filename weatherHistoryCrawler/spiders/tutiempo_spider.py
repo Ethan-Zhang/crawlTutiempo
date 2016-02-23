@@ -41,7 +41,7 @@ class TutiempoSpider(scrapy.Spider):
         self.end_year = int(argv['end_year'])
 
     def parse(self, response):
-        city_a = response.xpath('//div[@class="DobleList"]/ul/li/a[contains(text(), "%s")]/@href' % self.city_name).extract_first()
+        city_a = response.xpath('//div[@class="DobleList"]/ul/li/a[re:match(text(), "(?i)%s")]/@href' % self.city_name).extract_first()
         next_page = response.xpath('//div[@class="AntSig"]/ul/li/a[contains(strong, "Next")]/@href').extract_first()
         if not city_a and next_page:
             next_page = response.urljoin(next_page)
