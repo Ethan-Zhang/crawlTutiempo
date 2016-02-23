@@ -20,6 +20,19 @@ from weatherHistoryCrawler.items import WeatherhistorycrawlerItem
 class TutiempoSpider(scrapy.Spider):
     name = "tutiempo"
     start_urls = ["http://en.tutiempo.net/climate/china.html"]
+    month_dic = {'January': '01',
+                'February': '02',
+                'March': '03',
+                'April': '04',
+                'May': '05',
+                'June': '06',
+                'July': '07',
+                'August': '08',
+                'September': '09',
+                'October': '10',
+                'November': '11',
+                'December': '12',
+                }
 
     def __init__(self, *argc, **argv):
         super(TutiempoSpider, self).__init__(*argc, **argv)
@@ -54,7 +67,7 @@ class TutiempoSpider(scrapy.Spider):
             month_url = month_block.xpath('a/@href').extract_first()
             request = scrapy.Request(response.urljoin(month_url), callback=self.parse_month)
             request.meta['year'] = response.meta['year']
-            request.meta['month'] = month_en
+            request.meta['month'] = TutiempoSpider.month_dic[month_en]
             yield request
 
     def parse_month(self, response):
@@ -65,9 +78,9 @@ class TutiempoSpider(scrapy.Spider):
             if not data[0].isdigit():
                 continue
             item = WeatherhistorycrawlerItem()
-            item['date'] = '%s/%s/%s' % (response.meta['year'],
+            item['date'] = '%s%s%02d' % (response.meta['year'],
                                         response.meta['month'], 
-                                        data[0])
+                                        int(data[0]))
             item['T'] = data[1]
             item['TM'] = data[2]
             item['Tm'] = data[3]
