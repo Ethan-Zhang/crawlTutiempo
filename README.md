@@ -27,5 +27,5 @@ View city name list in city.json
 
 
 # More Infomation
-[tutiempo China](http://en.tutiempo.net/climate/china)
-[scrapy](https://github.com/scrapy/scrapy)
+* [tutiempo China](http://en.tutiempo.net/climate/china)
+* [scrapy](https://github.com/scrapy/scrapy)
