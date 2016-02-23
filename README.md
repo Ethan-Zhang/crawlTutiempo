@@ -6,7 +6,7 @@ A simple crawler for the history weather data in the en.tutiempo.net using scrap
 * Works on Linux, Windows, Mac OSX, BSD
 
 # Installation
-```Python
+```Shell
 pip install scrapy
 git clone https://github.com/Ethan-Zhang/crawlTutiempo.git
 ```
@@ -17,7 +17,14 @@ git clone https://github.com/Ethan-Zhang/crawlTutiempo.git
 cd crawlTutiempo
 scrapy crawl tutiempo -a city=Beijing -a start_year=2014 -a end_year=2015 -o item.json
 ```
-**View the history weather data in item.json**
+View the history weather data in item.json
+
+**If you don't know the city name, crawl the ctiy name list**
+```
+scrapy crawl cityname
+```
+View city name list in city.json
+
 
 # More Infomation
 [tutiempo China](http://en.tutiempo.net/climate/china)
