@@ -41,7 +41,7 @@ class TutiempoSpider(scrapy.Spider):
         self.end_year = int(argv['end_year'])
 
     def parse(self, response):
-        city_a = response.xpath('//div[@class="DobleList"]/ul/li/a[re:match(text(), "(?i)%s")]/@href' % self.city_name).extract_first()
+        city_a = response.xpath('//div[@class="mlistados mt10"]/ul/li/a[re:match(text(), "(?i)%s")]/@href' % self.city_name).extract_first()
         next_page = response.xpath('//div[@class="AntSig"]/ul/li/a[contains(strong, "Next")]/@href').extract_first()
         if not city_a and next_page:
             next_page = response.urljoin(next_page)
@@ -61,9 +61,9 @@ class TutiempoSpider(scrapy.Spider):
 
     def parse_year(self, response):
         #months = response.xpath('//div[@class="SelClima"]/ul/li/a/@href').extract()
-        months = response.xpath('//div[@class="SelClima"]/ul/li')
+        months = response.xpath('//div[@class="mlistados mt10"]/ul/li')
         for month_block in months:
-            month_en = month_block.xpath('a/abbr/@title').extract_first()
+            month_en = month_block.xpath('a/text()').extract_first()
             month_url = month_block.xpath('a/@href').extract_first()
             request = scrapy.Request(response.urljoin(month_url), callback=self.parse_month)
             request.meta['year'] = response.meta['year']

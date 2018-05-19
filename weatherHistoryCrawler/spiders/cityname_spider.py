@@ -22,7 +22,7 @@ class CityNameSpider(scrapy.Spider):
     start_urls = ["http://en.tutiempo.net/climate/china.html"]
 
     def parse(self, response):
-        cities = response.xpath('//div[@class="DobleList"]/ul/li/a/text()').extract()
+        cities = response.xpath('//div[@class="mlistados mt10"]/ul/li/a/text()').extract()
         for city in cities:
             yield {'city':city}
         next_page = response.xpath('//div[@class="AntSig"]/ul/li/a[contains(strong, "Next")]/@href').extract_first()
